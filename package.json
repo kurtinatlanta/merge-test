@@ -1,0 +1,22 @@
+{
+  "name": "merge-test",
+  "version": "1.0.0",
+  "description": "Test git merge options",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "merge-test.git"
+  },
+  "keywords": [
+    "merge",
+    "test"
+  ],
+  "author": "Kurt Hoyt",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^3.5.3"
+  }
+}
