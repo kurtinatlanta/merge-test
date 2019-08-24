@@ -17,6 +17,7 @@
   "author": "Kurt Hoyt",
   "license": "MIT",
   "dependencies": {
+    "react": "^16.9.0",
     "typescript": "^3.5.3"
   }
 }
