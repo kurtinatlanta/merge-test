@@ -19,5 +19,8 @@
   "dependencies": {
     "react": "^16.9.0",
     "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "tslint": "^5.19.0"
   }
 }
