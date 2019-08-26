@@ -66,6 +66,22 @@ if (typeof results.stdout === 'string') {
   const previous = Math.max(0, currentIndex - 1);
   const next = Math.min(branches.length, currentIndex + 1);
 
+  console.log(`Branch to merge from: ${'remotes/origin/' + branches[previous].name}`);
   console.log(`Previous branch: ${JSON.stringify(branches[previous])}`);
   console.log(`Next branch: ${JSON.stringify(branches[next])}`);
+
+  if (previous < currentIndex) {
+    const previousBranch = 'remotes/origin/' + branches[previous].name;
+    const mergeResults = shell.exec(`git merge -Xours -m 'Automerge from ${previousBranch}' --log ${previousBranch}`, { silent: true });
+    console.log(mergeResults);
+
+    if (!mergeResults.code && mergeResults.stdout === 'Already up to date.\n') {
+      console.log('No merge');
+    }
+    else {
+      console.log('Code merged. Pushing to origin.');
+      shell.exec('git push origin');
+    }
+
+  }
 }
