@@ -75,13 +75,18 @@ if (typeof results.stdout === 'string') {
     const mergeResults = shell.exec(`git merge -Xours -m 'Automerge from ${previousBranch}' --log ${previousBranch}`, { silent: true });
     console.log(mergeResults);
 
-    if (!mergeResults.code && mergeResults.stdout === 'Already up to date.\n') {
-      console.log('No merge');
+    if (mergeResults.code) {
+      console.error(mergeResults.stdout);
+      return 128;
     }
     else {
-      console.log('Code merged. Pushing to origin.');
-      shell.exec('git push origin');
+      if (mergeResults.stdout === 'Already up to date.\n') {
+        console.log('No merge');
+      }
+      else {
+        console.log('Code merged. Pushing to origin.');
+        shell.exec('git push origin');
+      }
     }
-
   }
 }
