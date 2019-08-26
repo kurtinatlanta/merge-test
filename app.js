@@ -1,4 +1,4 @@
-const shell = require('shelljs');
+import { exec } from 'shelljs';
 
 const sortBranches = (a, b) => {
   if (a.major < b.major) {
@@ -37,7 +37,7 @@ const sortBranches = (a, b) => {
 
 const onlyDigits = /^\d+$/;
 
-const results = shell.exec(`git branch -a --list 'release/*'`, { silent: true });
+const results = exec(`git branch -a --list 'release/*'`, { silent: true });
 console.log(JSON.stringify(results));
 
 if (typeof results.stdout === 'string') {
@@ -72,7 +72,7 @@ if (typeof results.stdout === 'string') {
 
   if (previous < currentIndex) {
     const previousBranch = 'remotes/origin/' + branches[previous].name;
-    const mergeResults = shell.exec(`git merge -Xours -m 'Automerge from ${previousBranch}' --log ${previousBranch}`, { silent: true });
+    const mergeResults = exec(`git merge -Xours -m 'Automerge from ${previousBranch}' --log ${previousBranch}`, { silent: true });
     console.log(mergeResults);
 
     if (mergeResults.code) {
@@ -85,7 +85,7 @@ if (typeof results.stdout === 'string') {
       }
       else {
         console.log('Code merged. Pushing to origin.');
-        shell.exec('git push origin');
+        exec('git push origin');
       }
     }
   }
